@@ -31,14 +31,14 @@ export function Profile({ profile, className }: Props) {
         <Avatar
           className="relative -top-8 -mb-6 size-16"
           src={profile.avatar}
-          alt={`@${profile.username}'s avatar`}
-          fallback={profile.username.toLocaleUpperCase().at(0)}
+          alt={`@${profile.handle}'s avatar`}
+          fallback={profile.handle.toLocaleUpperCase().at(0)}
         />
         <p className="line-clamp-1 text-lg font-semibold leading-5">
-          {profile.displayName || profile.username}
+          {profile.displayName || profile.handle}
         </p>
         <p className="line-clamp-1 text-sm text-muted-foreground">
-          @{profile.username}
+          @{profile.handle}
         </p>
       </div>
     </div>

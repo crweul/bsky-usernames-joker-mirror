@@ -53,8 +53,8 @@ const indianSlurs = [
   "Ricebag",
 ]
 
-export const hasExplicitSlur = (username: string): boolean => {
-  const lowercaseHandle = username.toLowerCase()
+export const hasExplicitSlur = (handle: string): boolean => {
+  const lowercaseHandle = handle.toLowerCase()
   return (
     explicitSlurRegexes.some((reg) => reg.test(lowercaseHandle)) ||
     indianSlurs.map((x) => x.toLowerCase()).includes(lowercaseHandle)

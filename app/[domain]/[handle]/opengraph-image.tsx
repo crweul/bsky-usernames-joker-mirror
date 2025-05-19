@@ -14,13 +14,13 @@ export const runtime = "edge"
 export default async function og({
   params,
 }: {
-  params: { domain: string; username: string }
+  params: { domain: string; handle: string }
 }) {
-  const { domain, username } = params
+  const { domain, handle } = params
 
   const {
     data: { did },
-  } = await agent.resolveHandle({ username: `${username}.${domain}` })
+  } = await agent.resolveHandle({ handle: `${handle}.${domain}` })
 
   const profile = await agent.getProfile({
     actor: did,
@@ -65,7 +65,7 @@ export default async function og({
               </p>
             )}
             <p tw="m-0 text-neutral-500 text-2xl w-[500px]">
-              @{profile.data.username}
+              @{profile.data.handle}
             </p>
           </div>
         </div>

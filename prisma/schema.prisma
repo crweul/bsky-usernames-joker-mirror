@@ -22,12 +22,12 @@ model Domain {
 model User {
   id       String @id @default(uuid())
   did      String
-  username String
+  handle   String
   domainId String
   domain   Domain @relation(fields: [domainId], references: [id])
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@unique([username, domainId])
+  @@unique([handle, domainId])
 }
