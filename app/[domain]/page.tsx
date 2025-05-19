@@ -12,8 +12,8 @@ import { Stage } from "@/components/stage"
 export function generateMetadata({ params }: { params: { domain: string } }) {
   const domain = params.domain
   return {
-    title: `${domain} - get your community handle for Bluesky`,
-    description: `get your own ${domain} handle`,
+    title: `${domain} - get your community username for Bluesky`,
+    description: `get your own ${domain} username`,
   }
 }
 
@@ -153,7 +153,7 @@ export default async function IndexPage({
             </div>
           </form>
         </Stage>
-        <Stage title="Choose your new handle" number={2} disabled={!profile}>
+        <Stage title="Choose your new username" number={2} disabled={!profile}>
           <form>
             <input type="hidden" name="handle" value={handle} />
             <div className="grid w-full max-w-sm items-center gap-1.5">
@@ -174,13 +174,13 @@ export default async function IndexPage({
                 <p className="text-sm text-red-500">
                   {(() => {
                     switch (error2) {
-                      case "handle taken":
-                        return "Handle already taken - please enter a different handle"
-                      case "invalid handle":
+                      case "username taken":
+                        return "Username already taken - please enter a different handle"
+                      case "invalid username":
                       case "slur":
-                        return "Invalid handle - please enter a different handle"
+                        return "Invalid username - please enter a different handle"
                       case "reserved":
-                        return "Reserved handle - please enter a different handle"
+                        return "Reserved username - please enter a different handle"
                       default:
                         return "An error occured - please try again"
                     }
@@ -191,7 +191,7 @@ export default async function IndexPage({
           </form>
         </Stage>
         <Stage
-          title="Change your handle within the Bluesky app"
+          title="Change your username within the Bluesky app"
           number={3}
           disabled={!newHandle || !!error2}
           last
@@ -199,12 +199,12 @@ export default async function IndexPage({
           <p className="max-w-lg text-sm">
             Go to Settings {">"} Advanced {">"} Change my handle. Select &quot;I
             have my own domain&quot; and enter{" "}
-            {newHandle ? `"${newHandle}"` : "your new handle"}. Finally, tap
+            {newHandle ? `"${newHandle}"` : "your new username"}. Finally, tap
             &quot;Verify DNS Record&quot;. Please note that it may take a few minutes for your new handle to be validated.
           </p>
           <p className="mt-6 max-w-lg text-sm">
             Registering a domain costs me money. If you would like to contribute, you can{" "}
-            <a href="https://github.com/sponsors/mozzius" className="underline">
+            <a href="https://killua.nz" className="underline">
               help funding this project
             </a>
             .
