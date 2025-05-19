@@ -11,7 +11,7 @@ import {
 import { Stage } from "@/components/stage"
 
 export const metadata = {
-  title: "Create a Community Handle for your community",
+  title: "Create a Community Username for your community",
   description: "Host your own tool",
 }
 
@@ -20,11 +20,11 @@ export default function CommunityPage() {
     <main className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
       <div className="flex max-w-[980px] flex-col items-start gap-4">
         <h1 className="text-3xl font-extrabold leading-tight tracking-tighter sm:text-3xl md:text-5xl lg:text-6xl">
-          Create a Community Handle <br className="hidden sm:inline" />
+          Create a Community Username <br className="hidden sm:inline" />
           for your community
         </h1>
         <p className="max-w-[700px] text-lg text-muted-foreground sm:text-xl">
-          Want a custom community handle for your community, like
+          Want a custom community username for your community, like
           @alex.swifties.social, @jay.army.social, or @jane.kawaii.social? Follow
           these steps to get one.
         </p>
@@ -45,12 +45,12 @@ export default function CommunityPage() {
             are able to change where you point the nameservers.
           </p>
         </Stage>
-        <Stage title="Host the Community Handles tool" number={2} last>
+        <Stage title="Host the Community Usernames tool" number={2} last>
           <p className="max-w-lg">You then need to host the tool.</p>
           <p className="mt-4 max-w-lg">
             If you want to host it yourself,{" "}
             <a
-              href="https://github.com/mozzius/community-handles"
+              href="https://github.com/mozzius/community-usernames"
               className="underline"
             >
               fork the project on GitHub

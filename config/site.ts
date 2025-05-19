@@ -11,11 +11,11 @@ export const siteConfig = {
       href: "/community",
     },
     {
-      title: "Create your own community handle",
+      title: "Create your own community username",
       href: "/create-your-own",
     },
   ],
   links: {
-    github: "https://github.com/mozzius/community-handles",
+    github: "https://github.com/mozzius/community-usernames",
   },
 }

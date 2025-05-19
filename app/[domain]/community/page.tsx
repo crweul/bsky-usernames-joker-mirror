@@ -45,7 +45,7 @@ export default async function CommunityPage({ params }: Props) {
           Want to join the {count} members of the {domain} community? Get your
           own{" "}
           <Link href="/" className="underline">
-            {domain} handle
+            {domain} username
           </Link>
           .
         </p>
@@ -69,7 +69,7 @@ function ProfileListSection({
   profiles: AppBskyActorDefs.ProfileViewDetailed[]
 }) {
   return profiles.map((profile) => (
-    <a href={`https://bsky.app/profile/${profile.handle}`} key={profile.did}>
+    <a href={`https://bsky.app/profile/${profile.username}`} key={profile.did}>
       <Profile profile={profile} />
     </a>
   ))
@@ -110,7 +110,7 @@ async function getUsers(domain: string, offset = 0) {
     .filter(
       (value, index, array) =>
         array.findIndex(({ did }) => did === value.did) === index &&
-        value.handle.endsWith(domain)
+        value.username.endsWith(domain)
     )
 
   return {

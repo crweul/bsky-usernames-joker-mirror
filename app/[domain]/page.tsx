@@ -12,8 +12,8 @@ import { Stage } from "@/components/stage"
 export function generateMetadata({ params }: { params: { domain: string } }) {
   const domain = params.domain
   return {
-    title: `${domain} - get your community handle for Bluesky`,
-    description: `get your own ${domain} handle`,
+    title: `${domain} - get your community username for Bluesky`,
+    description: `get your own ${domain} username`,
   }
 }
 
@@ -25,25 +25,25 @@ export default async function IndexPage({
     domain: string
   }
   searchParams: {
-    handle?: string
-    "new-handle"?: string
+    username?: string
+    "new-username"?: string
   }
 }) {
   const domain = params.domain
-  let handle = searchParams.handle
-  let newHandle = searchParams["new-handle"]
+  let username = searchParams.username
+  let newHandle = searchParams["new-username"]
   let profile: AppBskyActorDefs.ProfileView | undefined
   let error1: string | undefined
   let error2: string | undefined
 
-  if (handle) {
+  if (username) {
     try {
-      if (!handle.includes(".")) {
-        handle += ".bsky.social"
+      if (!username.includes(".")) {
+        username += ".bsky.social"
       }
-      console.log("fetching profile", handle)
+      console.log("fetching profile", username)
       const actor = await agent.getProfile({
-        actor: handle,
+        actor: username,
       })
       if (!actor.success) throw new Error("fetch was not a success")
       profile = actor.data
@@ -64,27 +64,27 @@ export default async function IndexPage({
         )
         if (validHandle) {
           try {
-            const handle = newHandle.replace(`.${domain}`, "")
-            if (hasExplicitSlur(handle)) {
+            const username = newHandle.replace(`.${domain}`, "")
+            if (hasExplicitSlur(username)) {
               throw new Error("slur")
             }
 
-            if (domain === "army.social" && RESERVED.includes(handle)) {
+            if (domain === "army.social" && RESERVED.includes(username)) {
               throw new Error("reserved")
             }
 
             const existing = await prisma.user.findFirst({
-              where: { handle },
+              where: { username },
               include: { domain: true },
             })
             if (existing && existing.domain.name === domain) {
               if (existing.did !== profile.did) {
-                error2 = "handle taken"
+                error2 = "username taken"
               }
             } else {
               await prisma.user.create({
                 data: {
-                  handle,
+                  username,
                   did: profile.did,
                   domain: {
                     connectOrCreate: {
@@ -100,7 +100,7 @@ export default async function IndexPage({
             error2 = (e as Error)?.message ?? "unknown error"
           }
         } else {
-          error2 = "invalid handle"
+          error2 = "invalid username"
         }
       }
     }
@@ -111,35 +111,35 @@ export default async function IndexPage({
       <div className="flex max-w-[980px] flex-col items-start gap-4">
         <h1 className="text-3xl font-extrabold leading-tight tracking-tighter sm:text-3xl md:text-5xl lg:text-6xl">
           Get your own {domain} <br className="hidden sm:inline" />
-          handle for Bluesky
+          username for Bluesky
         </h1>
         <p className="max-w-[700px] text-lg text-muted-foreground sm:text-xl">
-          Follow the instructions below to get your own {domain} handle
+          Follow the instructions below to get your own {domain} username
         </p>
       </div>
       <div>
-        <Stage title="Enter your current handle" number={1}>
+        <Stage title="Enter your current username" number={1}>
           <form>
             <div className="grid w-full max-w-sm items-center gap-1.5">
               <div className="flex w-full max-w-sm items-center space-x-2">
                 {newHandle && (
-                  <input type="hidden" name="new-handle" value="" />
+                  <input type="hidden" name="new-username" value="" />
                 )}
                 <Input
                   type="text"
-                  name="handle"
+                  name="username"
                   placeholder="example.bsky.social"
-                  defaultValue={handle}
+                  defaultValue={username}
                   required
                 />
                 <Button type="submit">Submit</Button>
               </div>
               <p className="text-sm text-muted-foreground">
-                Enter your current handle, not including the @
+                Enter your current username, not including the @
               </p>
               {error1 && (
                 <p className="flex flex-row items-center gap-2 text-sm text-red-500">
-                  <X className="size-4" /> Handle not found - please try again
+                  <X className="size-4" /> Username not found - please try again
                 </p>
               )}
               {profile && (
@@ -153,34 +153,34 @@ export default async function IndexPage({
             </div>
           </form>
         </Stage>
-        <Stage title="Choose your new handle" number={2} disabled={!profile}>
+        <Stage title="Choose your new username" number={2} disabled={!profile}>
           <form>
-            <input type="hidden" name="handle" value={handle} />
+            <input type="hidden" name="username" value={username} />
             <div className="grid w-full max-w-sm items-center gap-1.5">
               <div className="flex w-full max-w-sm items-center space-x-2">
                 <Input
                   type="text"
-                  name="new-handle"
+                  name="new-username"
                   placeholder={`example.${domain}`}
                   defaultValue={newHandle}
                 />
                 <Button type="submit">Submit</Button>
               </div>
               <p className="text-sm text-muted-foreground">
-                Enter the {domain} handle that you would like to have, not
+                Enter the {domain} username that you would like to have, not
                 including the @
               </p>
               {error2 && (
                 <p className="text-sm text-red-500">
                   {(() => {
                     switch (error2) {
-                      case "handle taken":
-                        return "Handle already taken - please enter a different handle"
-                      case "invalid handle":
+                      case "username taken":
+                        return "Username already taken - please enter a different username"
+                      case "invalid username":
                       case "slur":
-                        return "Invalid handle - please enter a different handle"
+                        return "Invalid username - please enter a different username"
                       case "reserved":
-                        return "Reserved handle - please enter a different handle"
+                        return "Reserved username - please enter a different username"
                       default:
                         return "An error occured - please try again"
                     }
@@ -191,16 +191,16 @@ export default async function IndexPage({
           </form>
         </Stage>
         <Stage
-          title="Change your handle within the Bluesky app"
+          title="Change your username within the Bluesky app"
           number={3}
           disabled={!newHandle || !!error2}
           last
         >
           <p className="max-w-lg text-sm">
-            Go to Settings {">"} Advanced {">"} Change my handle. Select &quot;I
+            Go to Settings {">"} Advanced {">"} Change my username. Select &quot;I
             have my own domain&quot; and enter{" "}
-            {newHandle ? `"${newHandle}"` : "your new handle"}. Finally, tap
-            &quot;Verify DNS Record&quot;. Please note that it may take a few minutes for your new handle to be validated.
+            {newHandle ? `"${newHandle}"` : "your new username"}. Finally, tap
+            &quot;Verify DNS Record&quot;. Please note that it may take a few minutes for your new username to be validated.
           </p>
           <p className="mt-6 max-w-lg text-sm">
             Registering a domain costs me money. If you would like to contribute, you can{" "}

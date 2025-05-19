@@ -9,13 +9,13 @@ async function main() {
   for (const key of keys) {
     const did = (await kv.get(key)) as string
 
-    const [handle, ...rest] = key.split(".")
+    const [username, ...rest] = key.split(".")
     const domain = rest.join(".")
 
     await prisma.user.create({
       data: {
         did,
-        handle,
+        username,
         domain: {
           connectOrCreate: {
             where: {

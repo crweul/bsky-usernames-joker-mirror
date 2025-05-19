@@ -9,12 +9,12 @@ async function main() {
   }
   for (const domain of await prisma.domain.findMany()) {
     console.log(domain.name)
-    let csv: string[][] = [["handle", "did", "createdAt"]]
+    let csv: string[][] = [["username", "did", "createdAt"]]
     const users = await prisma.user.findMany({
       where: { domainId: domain.id },
     })
     for (const user of users) {
-      csv.push([user.handle, user.did, user.createdAt.toISOString()])
+      csv.push([user.username, user.did, user.createdAt.toISOString()])
     }
     fs.writeFileSync(
       `./export/${domain.name.replace(".", "_")}.csv`,

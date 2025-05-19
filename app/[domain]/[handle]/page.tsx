@@ -5,13 +5,13 @@ import { prisma } from "@/lib/db"
 import { Profile } from "@/components/profile"
 
 interface Props {
-  params: { handle: string; domain: string }
+  params: { username: string; domain: string }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const domain = params.domain
   const user = await prisma.user.findFirst({
-    where: { handle: params.handle, domain: { name: domain } },
+    where: { username: params.username, domain: { name: domain } },
   })
   if (!user) {
     return {
@@ -24,17 +24,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     actor: user.did,
   })
   return {
-    title: `${profile.data.displayName} - @${profile.data.handle}`,
+    title: `${profile.data.displayName} - @${profile.data.username}`,
     description: profile.data.description,
   }
 }
 
 export default async function HandlePage({ params }: Props) {
-  const { domain, handle } = params
+  const { domain, username } = params
 
   try {
     const user = await prisma.user.findFirstOrThrow({
-      where: { handle, domain: { name: domain } },
+      where: { username, domain: { name: domain } },
     })
 
     const profile = await agent.getProfile({
@@ -42,7 +42,7 @@ export default async function HandlePage({ params }: Props) {
     })
     return (
       <div className="grid flex-1 place-items-center">
-        <a href={`https://bsky.app/profile/${profile.data.handle}`}>
+        <a href={`https://bsky.app/profile/${profile.data.username}`}>
           <Profile profile={profile.data} />
         </a>
       </div>
