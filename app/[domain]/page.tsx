@@ -96,8 +96,9 @@ export default async function IndexPage({
               })
             }
           } catch (e) {
-            console.error(e)
-            error2 = (e as Error)?.message ?? "unknown error"
+            const actualError = (e as Error)?.message ?? "unknown error"
+            console.error("New handle registration error:", actualError)
+            error2 = actualError
           }
         } else {
           error2 = "invalid handle"
@@ -182,7 +183,7 @@ export default async function IndexPage({
                       case "reserved":
                         return "Reserved username - please enter a different handle"
                       default:
-                        return "An error occured - please try again"
+                        return `Unexpected error: ${error2}`
                     }
                   })()}
                 </p>
