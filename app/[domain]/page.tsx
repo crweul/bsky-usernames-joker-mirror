@@ -69,10 +69,6 @@ export default async function IndexPage({
               throw new Error("slur")
             }
 
-            if (domain === "army.social" && RESERVED.includes(handle)) {
-              throw new Error("reserved")
-            }
-
             const existing = await prisma.user.findFirst({
               where: { handle },
               include: { domain: true },
@@ -112,14 +108,14 @@ export default async function IndexPage({
       <div className="flex max-w-[980px] flex-col items-start gap-4">
         <h1 className="text-3xl font-extrabold leading-tight tracking-tighter sm:text-3xl md:text-5xl lg:text-6xl">
           Get your own {domain} <br className="hidden sm:inline" />
-          handle for Bluesky
+          username for Bluesky
         </h1>
         <p className="max-w-[700px] text-lg text-muted-foreground sm:text-xl">
-          Follow the instructions below to get your own {domain} handle
+          Follow the instructions below to get your own {domain} username.
         </p>
       </div>
       <div>
-        <Stage title="Enter your current handle" number={1}>
+        <Stage title="Enter your current username" number={1}>
           <form>
             <div className="grid w-full max-w-sm items-center gap-1.5">
               <div className="flex w-full max-w-sm items-center space-x-2">
@@ -136,17 +132,17 @@ export default async function IndexPage({
                 <Button type="submit">Submit</Button>
               </div>
               <p className="text-sm text-muted-foreground">
-                Enter your current handle, not including the @
+                Enter your current username, not including the @.
               </p>
               {error1 && (
                 <p className="flex flex-row items-center gap-2 text-sm text-red-500">
-                  <X className="size-4" /> Handle not found - please try again
+                  <X className="size-4" /> Username not found - please try again.
                 </p>
               )}
               {profile && (
                 <>
                   <p className="text-muted-forground mt-4 flex flex-row items-center gap-2 text-sm">
-                    <Check className="size-4 text-green-500" /> Account found
+                    <Check className="size-4 text-green-500" /> Account found!
                   </p>
                   <Profile profile={profile} className="mt-4" />
                 </>
@@ -168,8 +164,8 @@ export default async function IndexPage({
                 <Button type="submit">Submit</Button>
               </div>
               <p className="text-sm text-muted-foreground">
-                Enter the {domain} handle that you would like to have, not
-                including the @
+                Enter the {domain} username that you would like to have, not
+                including the @.
               </p>
               {error2 && (
                 <p className="text-sm text-red-500">
@@ -192,7 +188,7 @@ export default async function IndexPage({
           </form>
         </Stage>
         <Stage
-          title="Change your username within the Bluesky app"
+          title="Change your username within the Bluesky app."
           number={3}
           disabled={!newHandle || !!error2}
           last

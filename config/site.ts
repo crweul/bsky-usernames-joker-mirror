@@ -11,7 +11,4 @@ export const siteConfig = {
       href: "/community",
     },
   ],
-  links: {
-    github: "https://github.com/mozzius/community-usernames",
-  },
 }
