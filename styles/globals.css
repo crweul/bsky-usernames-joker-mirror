@@ -82,7 +82,7 @@
 
 @font-face {
   font-family: "Persona5MenuFont";
-  src: url("/public/Persona5MenuFontPrototype-Regular.ttf") format("truetype");
+  src: url("/Persona5MenuFontPrototype-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
