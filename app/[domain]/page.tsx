@@ -199,12 +199,12 @@ export default async function IndexPage({
             {newHandle ? `"${newHandle}"` : "your new username"}. Finally, tap
             &quot;Verify DNS Record&quot;. Please note that it may take a few minutes for your new handle to be validated.
           </p>
-          <p className="mt-6 max-w-lg text-sm">
+          <p className="max-w-[700px] text-lg text-muted-foreground sm:text-xl">
             Registering a domain costs me money. If you would like to contribute, you can{" "}
-            <a href="https://killua.nz" className="underline">
+            <a href="https://ko-fi.com/kylo" className="underline">
               help funding this project
             </a>
-            .
+            . ❤️
           </p>
         </Stage>
       </div>
