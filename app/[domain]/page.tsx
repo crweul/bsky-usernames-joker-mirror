@@ -194,21 +194,21 @@ export default async function IndexPage({
           last
         >
           <p className="max-w-lg text-sm">
-            Go to Settings {">"} Advanced {">"} Change my handle. Select &quot;I
+            Go to Settings {"→"} Advanced {"→"} Change my handle. Select &quot;I
             have my own domain&quot; and enter{" "}
             {newHandle ? `"${newHandle}"` : "your new username"}. Finally, tap
             &quot;Verify DNS Record&quot;. Please note that it may take a few minutes for your new handle to be validated.
           </p>
-          <div className="mt-6 rounded-md bg-muted p-4">
-            <h2 className="max-w-lg font-semibold">
-              Registering a domain costs me money. If you would like to contribute, you can{" "}
-              <a href="https://ko-fi.com/kylo" className="underline">
-                help me fund this project
-              </a>
-              . ❤️
-            </h2>
-          </div>
         </Stage>
+        <div className="mt-6 rounded-md bg-muted p-4">
+          <h2 className="max-w-lg font-semibold">
+            Registering a domain costs me money. If you would like to contribute, you can{" "}
+            <a href="https://ko-fi.com/kylo" className="underline">
+              help me fund this project
+            </a>
+            . ❤️
+          </h2>
+        </div>
       </div>
     </main>
   )
