@@ -9,9 +9,9 @@ import "@/styles/globals.css"
 
 export const metadata: Metadata = {
   icons: {
-    icon: "/favicon.ico",
-    shortcut: "/favicon-16x16.png",
-    apple: "/apple-touch-icon.png",
+    icon: "https://i.pinimg.com/736x/b9/7e/83/b97e833dd2048893a250814a4b3bf571.jpg",
+    shortcut: "https://i.pinimg.com/736x/b9/7e/83/b97e833dd2048893a250814a4b3bf571.jpg",
+    apple: "https://i.pinimg.com/736x/b9/7e/83/b97e833dd2048893a250814a4b3bf571.jpg",
   },
 }
 

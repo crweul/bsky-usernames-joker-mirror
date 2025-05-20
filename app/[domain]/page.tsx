@@ -75,7 +75,7 @@ export default async function IndexPage({
             })
             if (existing && existing.domain.name === domain) {
               if (existing.did !== profile.did) {
-                error2 = "handle taken"
+                error2 = "username taken"
               }
             } else {
               await prisma.user.create({
@@ -93,18 +93,18 @@ export default async function IndexPage({
             }
           } catch (e) {
             const actualError = (e as Error)?.message ?? "unknown error"
-            console.error("New handle registration error:", actualError)
+            console.error("New username registration error:", actualError)
             error2 = actualError
           }
         } else {
-          error2 = "invalid handle"
+          error2 = "invalid username"
         }
       }
     }
   }
 
   return (
-    <main className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
+    <main className="persona-font container grid items-center gap-6 pb-8 pt-6 md:py-10">
       <div className="flex max-w-[980px] flex-col items-start gap-4">
         <h1 className="text-3xl font-extrabold leading-tight tracking-tighter sm:text-3xl md:text-5xl lg:text-6xl">
           Get your own {domain} <br className="hidden sm:inline" />

@@ -79,3 +79,14 @@
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 }
+
+@font-face {
+  font-family: "Persona5MenuFont";
+  src: url("/public/Persona5MenuFontPrototype-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.persona-font {
+  font-family: "Persona5MenuFont", sans-serif;
+}
