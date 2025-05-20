@@ -45,7 +45,7 @@ export default async function CommunityPage({ params }: Props) {
           Want to join the {count} members of the {domain} community? Get your
           own{" "}
           <Link href="/" className="underline">
-            {domain} handle
+            {domain} username
           </Link>
           .
         </p>
