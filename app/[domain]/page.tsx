@@ -104,10 +104,10 @@ export default async function IndexPage({
   }
 
   return (
-    <main className="persona-font container grid items-center gap-6 pb-8 pt-6 md:py-10">
+    <main className="container grid items-center gap-6 pb-8 pt-6 md:py-10">
       <div className="flex max-w-[980px] flex-col items-start gap-4">
         <h1 className="text-3xl font-extrabold leading-tight tracking-tighter sm:text-3xl md:text-5xl lg:text-6xl">
-          Get your own {domain} <br className="hidden sm:inline" />
+          Get your own <span className="persona-font">{domain}</span> <br className="hidden sm:inline" />
           username for Bluesky
         </h1>
         <p className="max-w-[700px] text-lg text-muted-foreground sm:text-xl">
