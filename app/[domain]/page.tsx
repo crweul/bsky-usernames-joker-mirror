@@ -203,7 +203,7 @@ export default async function IndexPage({
             <h2 className="max-w-lg font-semibold">
               Registering a domain costs me money. If you would like to contribute, you can{" "}
               <a href="https://ko-fi.com/kylo" className="underline">
-                help funding this project
+                help me fund this project
               </a>
               . ❤️
             </h2>
