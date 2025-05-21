@@ -1,3 +1,4 @@
+import "server-only"
 import { AppBskyActorDefs } from "@atproto/api"
 import { Check, X } from "lucide-react"
 
@@ -94,7 +95,21 @@ export default async function IndexPage({
           } catch (e) {
             const actualError = (e as Error)?.message ?? "unknown error"
             console.error("New username registration error:", actualError)
-            error2 = actualError
+            try {
+              await fetch(process.env.DISCORD_ERROR_WEBHOOK!, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                  content: `<@270260819999064065> An error occurred at ${new Date().toISOString()}:\n\`\`\`${actualError}\`\`\``,
+                }),
+              })
+            } catch (webhookErr) {
+              console.error("Discord webhook failed:", webhookErr)
+              error2 = "Webhook failure"
+            }
+            if (actualError !== "unknown error") {
+              error2 = actualError
+            }
           }
         } else {
           error2 = "invalid username"
@@ -179,7 +194,7 @@ export default async function IndexPage({
                       case "reserved":
                         return "Reserved username - please enter a different handle"
                       default:
-                        return `Unexpected error: ${error2}`
+                        return `Unexpected error - the database may be out of order. Please try again later. If this issue persists, message @joker.tokyo on Bluesky.`
                     }
                   })()}
                 </p>
