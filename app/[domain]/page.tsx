@@ -187,14 +187,14 @@ export default async function IndexPage({
                   {(() => {
                     switch (error2) {
                       case "username taken":
-                        return "Username already taken - please enter a different handle"
+                        return "Username already taken, please choose a different username."
                       case "invalid username":
                       case "slur":
-                        return "Invalid username - please enter a different handle"
+                        return "Invalid username, please choose a different username."
                       case "reserved":
-                        return "Reserved username - please enter a different handle"
+                        return "Reserved username, please choose a different username."
                       default:
-                        return `Unexpected error - the database may be out of order. Please try again later. If this issue persists, message @joker.tokyo on Bluesky.`
+                        return `Unexpected error, the database may be out of order. Please try again later. If this issue persists, message @joker.tokyo on Bluesky.`
                     }
                   })()}
                 </p>
